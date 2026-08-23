@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fisiologia Interativa — aprenda com animações e IA (PT-BR)</title>
+  <meta name="description" content="Site educacional de fisiologia humana em português: 9 sistemas, animações interativas, quizzes e Tutor IA gratuito (Puter.js, sem chave de API).">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫀</text></svg>">
+  <link rel="stylesheet" href="css/style.css?v=5">
+  <!-- Tutor IA gratuito: Puter.js dá acesso a modelos de IA no navegador, sem chave de API -->
+  <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+
+  <header class="topo">
+    <a class="logo" href="#/">🫀 Fisio<span>logia</span> Interativa</a>
+    <span class="sub">· fisiologia humana universitária, em português</span>
+    <button class="topo-ia" id="topo-busca" title="Buscar (tecla /)">🔍 Buscar</button>
+    <button class="topo-ia" id="topo-ia">🤖 Tutor IA</button>
+  </header>
+
+  <main id="app"></main>
+
+  <!-- Botão flutuante do Tutor IA -->
+  <button id="fab-ia" title="Abrir Tutor IA">🤖 Tutor IA</button>
+
+  <!-- Painel lateral do Tutor IA -->
+  <aside id="chat-drawer" aria-label="Tutor IA">
+    <div class="chat-cabeca">
+      <b>🤖 Tutor IA <small>explica o que está na tela</small></b>
+      <select id="chat-modelo" title="Modelo de IA">
+        <option value="auto">Modelo: automático</option>
+        <option value="gpt-4o-mini">GPT-4o mini</option>
+        <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+        <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+      </select>
+      <button class="btn" id="chat-config-btn" title="Configurar API própria">⚙</button>
+      <button class="btn" id="chat-limpar" title="Limpar conversa">🗑</button>
+      <button class="btn" id="chat-close" title="Fechar">✕</button>
+    </div>
+    <div id="chat-msgs"></div>
+    <div class="chat-rodape">
+      <div class="chat-input-linha">
+        <textarea id="chat-input" placeholder="Pergunte qualquer coisa… ex.: explique o potencial de ação com uma analogia" rows="1"></textarea>
+        <button id="chat-send">➤</button>
+      </div>
+      <div class="chat-dica">IA gratuita via Puter.js (1º uso pede login gratuito) · ou ⚙ para sua chave própria (Groq/OpenAI/OpenRouter) · a IA pode cometer erros.</div>
+    </div>
+
+    <!-- Configuração de API própria -->
+    <div id="chat-config">
+      <h3>⚙ Usar sua própria API (opcional)</h3>
+      <p style="font-size:13px;color:var(--texto2);margin:0">Deixe em branco para usar o modo gratuito (Puter.js). Para usar outro serviço, preencha um endpoint compatível com OpenAI:</p>
+      <label>Endpoint (chat/completions)</label>
+      <input id="cfg-endpoint" placeholder="https://api.groq.com/openai/v1/chat/completions">
+      <label>Modelo</label>
+      <input id="cfg-model" placeholder="llama-3.1-8b-instant / gpt-4o-mini…">
+      <label>Chave de API</label>
+      <input id="cfg-key" type="password" placeholder="sk-…">
+      <div class="linha">
+        <button class="btn" id="cfg-cancel">Cancelar</button>
+        <button class="btn btn-ia" id="cfg-save">Salvar</button>
+      </div>
+    </div>
+  </aside>
+
+  <footer style="text-align:center;color:var(--texto2);font-size:12.5px;padding:30px 20px;border-top:1px solid var(--borda)">
+    Fisiologia Interativa · material educacional original em português, cobrindo os módulos clássicos da fisiologia (cardiovascular, respiratório, nervoso, muscular, urinário, endócrino, digestório, imunológico e fluidos/eletrólitos) · IA pelo Puter.js · não substitui livros-texto nem orientação médica.
+  </footer>
+
+  <script src="js/data.js?v=5"></script>
+  <script src="js/imagens.js?v=5"></script>
+  <script src="js/icons.js?v=5"></script>
+  <script src="js/interactives.js?v=5"></script>
+  <script src="js/ai.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
+</body>
+</html>
