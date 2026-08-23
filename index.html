@@ -6,7 +6,8 @@
   <title>Fisiologia Interativa — aprenda com animações e IA (PT-BR)</title>
   <meta name="description" content="Site educacional de fisiologia humana em português: 9 sistemas, animações interativas, quizzes e Tutor IA gratuito (Puter.js, sem chave de API).">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫀</text></svg>">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link id="css-main" rel="stylesheet" href="css/style.css?v=5"
+        onerror="this.onerror=null;this.href='style.css?v=5';">
   <!-- Tutor IA gratuito: Puter.js dá acesso a modelos de IA no navegador, sem chave de API -->
   <script src="https://js.puter.com/v2/"></script>
 </head>
@@ -68,11 +69,31 @@
     Fisiologia Interativa · material educacional original em português, cobrindo os módulos clássicos da fisiologia (cardiovascular, respiratório, nervoso, muscular, urinário, endócrino, digestório, imunológico e fluidos/eletrólitos) · IA pelo Puter.js · não substitui livros-texto nem orientação médica.
   </footer>
 
-  <script src="js/data.js?v=5"></script>
-  <script src="js/imagens.js?v=5"></script>
-  <script src="js/icons.js?v=5"></script>
-  <script src="js/interactives.js?v=5"></script>
-  <script src="js/ai.js?v=5"></script>
-  <script src="js/app.js?v=5"></script>
+  <!-- Carregador tolerante: tenta js/arquivo e, se não existir, tenta a raiz.
+       O site funciona tanto com a estrutura em pastas quanto com tudo na raiz. -->
+  <script>
+  (function () {
+    var ORDEM = ['js/data.js', 'js/imagens.js', 'js/icons.js', 'js/interactives.js', 'js/ai.js', 'js/app.js'];
+    function injeta(src, ok, falha) {
+      var s = document.createElement('script');
+      s.onload = ok;
+      s.onerror = falha;
+      s.src = src;
+      document.head.appendChild(s);
+    }
+    function carregar(i) {
+      if (i >= ORDEM.length) return;
+      var nome = ORDEM[i];
+      injeta(nome + '?v=5',                       /* 1ª tentativa: pasta js/ */
+        function () { carregar(i + 1); },
+        function () {
+          injeta('./' + nome.replace(/^js\//, '') + '?v=5',  /* 2ª tentativa: raiz */
+            function () { carregar(i + 1); },
+            function () { carregar(i + 1); });    /* sem o arquivo: segue */
+        });
+    }
+    carregar(0);
+  })();
+  </script>
 </body>
 </html>
