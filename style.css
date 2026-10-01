@@ -616,3 +616,9 @@ body[data-mod]:not([data-mod=""]) { --acento: var(--mc); --acento-2: color-mix(i
 .treino-lado .painel-tit { padding-left: 0; }
 .leitura .k { overflow-wrap: anywhere; }
 @media (max-width: 560px) { .atalho { grid-template-columns: 1fr; padding: 14px; } .atalho .ic { grid-row: auto; margin-bottom: 4px; } .atalho b { font-size: 1rem; } }
+
+/* v3.1.1 — aviso quando o WebGL está indisponível */
+.hv-semgl { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 20px 24px; text-align: center; color: #e6ebf2; font-size: .92rem; line-height: 1.45; }
+.hv-semgl b { font-size: 1rem; }
+.hv-semgl span { opacity: .8; max-width: 46ch; margin: 0 auto; }
+.painel-3d .hv-semgl { font-size: .8rem; padding: 12px; }
