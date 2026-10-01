@@ -2,98 +2,44 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fisiologia Interativa — aprenda com animações e IA (PT-BR)</title>
-  <meta name="description" content="Site educacional de fisiologia humana em português: 9 sistemas, animações interativas, quizzes e Tutor IA gratuito (Puter.js, sem chave de API).">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫀</text></svg>">
-  <link id="css-main" rel="stylesheet" href="css/style.css?v=5"
-        onerror="this.onerror=null;this.href='style.css?v=5';">
-  <!-- Tutor IA gratuito: Puter.js dá acesso a modelos de IA no navegador, sem chave de API -->
-  <script src="https://js.puter.com/v2/"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fisiologia Interativa</title>
+  <meta name="description" content="Fisiologia humana em português: órgãos anatômicos em 3D, simuladores em tempo real, casos clínicos em etapas, questões comentadas, flashcards e modo plantão nos 11 sistemas.">
+  <meta name="theme-color" content="#c21f3a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c21f3a'/%3E%3Cpath d='M4 17h6l3-7 4 13 3-9 2 3h6' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="style.css?v=3.1">
 </head>
 <body>
-
   <header class="topo">
-    <a class="logo" href="#/">🫀 Fisio<span>logia</span> Interativa</a>
-    <span class="sub">· fisiologia humana universitária, em português</span>
-    <button class="topo-ia" id="topo-busca" title="Buscar (tecla /)">🔍 Buscar</button>
-    <button class="topo-ia" id="topo-ia">🤖 Tutor IA</button>
+    <a class="logo" href="#/" aria-label="Fisiologia Interativa — início">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#c21f3a"/><path d="M4 17h6l3-7 4 13 3-9 2 3h6" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="txt">Fisiologia Interativa</span><small>3.1</small>
+    </a>
+    <nav aria-label="Seções">
+      <div class="menu-wrap"><button class="nav-bt" id="bt-sistemas" type="button" aria-haspopup="true">Sistemas <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button><div class="menu-sistemas" id="menu-sistemas" hidden></div></div>
+      <a href="#/labs">Laboratórios</a>
+      <a href="#/casos">Casos</a>
+      <a href="#/questoes">Questões</a>
+      <a href="#/flashcards">Flashcards</a>
+      <a href="#/plantao">Plantão</a>
+      <a href="#/painel">Painel</a>
+    </nav>
+    <div class="dir">
+      <button class="icone-bt" id="bt-busca" type="button" aria-label="Buscar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="txt">Buscar</span><kbd>/</kbd></button>
+      <button class="icone-bt" id="bt-tutor" type="button" aria-label="Tutor IA"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span class="txt">Tutor IA</span></button>
+      <button class="icone-bt so-ico" id="bt-tema" type="button" aria-label="Alternar tema claro/escuro"></button>
+    </div>
   </header>
-
-  <main id="app"></main>
-
-  <!-- Botão flutuante do Tutor IA -->
-  <button id="fab-ia" title="Abrir Tutor IA">🤖 Tutor IA</button>
-
-  <!-- Painel lateral do Tutor IA -->
-  <aside id="chat-drawer" aria-label="Tutor IA">
-    <div class="chat-cabeca">
-      <b>🤖 Tutor IA <small>explica o que está na tela</small></b>
-      <select id="chat-modelo" title="Modelo de IA">
-        <option value="auto">Modelo: automático</option>
-        <option value="gpt-4o-mini">GPT-4o mini</option>
-        <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
-        <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
-      </select>
-      <button class="btn" id="chat-config-btn" title="Configurar API própria">⚙</button>
-      <button class="btn" id="chat-limpar" title="Limpar conversa">🗑</button>
-      <button class="btn" id="chat-close" title="Fechar">✕</button>
-    </div>
-    <div id="chat-msgs"></div>
-    <div class="chat-rodape">
-      <div class="chat-input-linha">
-        <textarea id="chat-input" placeholder="Pergunte qualquer coisa… ex.: explique o potencial de ação com uma analogia" rows="1"></textarea>
-        <button id="chat-send">➤</button>
-      </div>
-      <div class="chat-dica">IA gratuita via Puter.js (1º uso pede login gratuito) · ou ⚙ para sua chave própria (Groq/OpenAI/OpenRouter) · a IA pode cometer erros.</div>
-    </div>
-
-    <!-- Configuração de API própria -->
-    <div id="chat-config">
-      <h3>⚙ Usar sua própria API (opcional)</h3>
-      <p style="font-size:13px;color:var(--texto2);margin:0">Deixe em branco para usar o modo gratuito (Puter.js). Para usar outro serviço, preencha um endpoint compatível com OpenAI:</p>
-      <label>Endpoint (chat/completions)</label>
-      <input id="cfg-endpoint" placeholder="https://api.groq.com/openai/v1/chat/completions">
-      <label>Modelo</label>
-      <input id="cfg-model" placeholder="llama-3.1-8b-instant / gpt-4o-mini…">
-      <label>Chave de API</label>
-      <input id="cfg-key" type="password" placeholder="sk-…">
-      <div class="linha">
-        <button class="btn" id="cfg-cancel">Cancelar</button>
-        <button class="btn btn-ia" id="cfg-save">Salvar</button>
-      </div>
-    </div>
-  </aside>
-
-  <footer style="text-align:center;color:var(--texto2);font-size:12.5px;padding:30px 20px;border-top:1px solid var(--borda)">
-    Fisiologia Interativa · material educacional original em português, cobrindo os módulos clássicos da fisiologia (cardiovascular, respiratório, nervoso, muscular, urinário, endócrino, digestório, imunológico e fluidos/eletrólitos) · IA pelo Puter.js · não substitui livros-texto nem orientação médica.
-  </footer>
-
-  <!-- Carregador tolerante: tenta js/arquivo e, se não existir, tenta a raiz.
-       O site funciona tanto com a estrutura em pastas quanto com tudo na raiz. -->
-  <script>
-  (function () {
-    var ORDEM = ['js/data.js', 'js/imagens.js', 'js/icons.js', 'js/interactives.js', 'js/ai.js', 'js/app.js'];
-    function injeta(src, ok, falha) {
-      var s = document.createElement('script');
-      s.onload = ok;
-      s.onerror = falha;
-      s.src = src;
-      document.head.appendChild(s);
-    }
-    function carregar(i) {
-      if (i >= ORDEM.length) return;
-      var nome = ORDEM[i];
-      injeta(nome + '?v=5',                       /* 1ª tentativa: pasta js/ */
-        function () { carregar(i + 1); },
-        function () {
-          injeta('./' + nome.replace(/^js\//, '') + '?v=5',  /* 2ª tentativa: raiz */
-            function () { carregar(i + 1); },
-            function () { carregar(i + 1); });    /* sem o arquivo: segue */
-        });
-    }
-    carregar(0);
-  })();
-  </script>
+  <main id="app"><p style="padding:40px 0;color:#8a94a6">Carregando…</p></main>
+  <footer class="rodape">Fisiologia Interativa 3.1 · por <b>@g.m.netto</b> · material educacional, não substitui livros-texto nem orientação médica · <a href="#/sobre">créditos e licenças</a> · <a href="#/conexoes">conexões</a> · <a href="#/glossario">glossário</a> · modelos 3D: BodyParts3D (CC BY-SA 2.1 JP)</footer>
+  <nav class="nav-baixo" aria-label="Navegação principal">
+    <a href="#/" data-r="inicio"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg><span>Início</span></a>
+    <a href="#/labs"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/></svg><span>Labs</span></a>
+    <a href="#/casos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M9 5V3h6v2M12 10v6M9 13h6"/></svg><span>Casos</span></a>
+    <a href="#/questoes"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/></svg><span>Questões</span></a>
+    <a href="#/painel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Painel</span></a>
+  </nav>
+  <script src="app.js?v=3.1"></script>
 </body>
 </html>
