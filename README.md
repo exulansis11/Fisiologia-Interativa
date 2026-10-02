@@ -6,15 +6,13 @@
 
 Plataforma gratuita de estudo de fisiologia humana em português, com órgãos anatômicos em 3D, simuladores que calculam a fisiologia em tempo real, casos clínicos e questões comentadas, cobrindo os 11 sistemas.
 
-### [▶ Abrir o app no navegador](https://SEU-USUARIO.github.io/fisiologia-interativa/)
+### [▶ Abrir o app no navegador]([https://SEU-USUARIO.github.io/fisiologia-interativa/](https://exulansis11.github.io/Fisiologia-Interativa/)
 
 ![versão](https://img.shields.io/badge/versão-3.1.1-c41e3a)
 ![sistemas](https://img.shields.io/badge/sistemas-11-1f6feb)
 ![laboratórios](https://img.shields.io/badge/laboratórios-54-6f42c1)
 ![questões](https://img.shields.io/badge/questões-261-2da44e)
 ![offline](https://img.shields.io/badge/funciona-offline-555)
-
-<img src="capturas/inicio.png" alt="Página inicial com o corpo humano em 3D" width="900">
 
 </div>
 
@@ -40,7 +38,6 @@ Não precisa de cadastro nem de instalação: o app abre no navegador, funciona 
 
 ## Destaques por sistema
 
-<img src="capturas/coracao-hemodinamica.png" alt="Simulador hemodinâmico com diagrama de Wiggers, alça pressão-volume e coração 3D" width="100%">
 
 - **Introdução**: corpo humano em 3D, termorregulação em tempo real (frio, calor úmido, febre, antitérmico) e curva dose-resposta.
 - **Celular**: célula em 3D, difusão × carreador, bomba Na⁺/K⁺ que pode ser desligada, SGLT, osmose na hemácia (com a pegadinha da ureia) e Nernst/Goldman.
@@ -53,8 +50,6 @@ Não precisa de cadastro nem de instalação: o app abre no navegador, funciona 
 - **Urinário**: rins em 3D, glomérulo com forças de Starling e autorregulação (AINE, IECA), clearance/FENa e LRA, diuréticos por segmento e teste de restrição hídrica.
 - **Imunológico**: órgãos linfoides em 3D, curso de uma infecção (neutropenia, corticoide, memória), IgM/IgG e vacinas, leucograma e hipersensibilidades.
 - **Líquidos e ácido-base**: Darrow–Yannet, correção de sódio (Adrogué–Madias) e hiponatremias, potássio e ECG, gasometria em 5 passos com modo treino e hidratação 4-2-1.
-
-<img src="capturas/pulmoes-3d.png" alt="Laboratório de pulmões em 3D com rótulos" width="100%">
 
 Além disso, o app tem:
 - **Atlas do corpo** na página inicial: gire o corpo e clique em um órgão para abrir o sistema.
