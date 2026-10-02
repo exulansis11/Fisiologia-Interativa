@@ -6,7 +6,7 @@
 
 Plataforma gratuita de estudo de fisiologia humana em português, com órgãos anatômicos em 3D, simuladores que calculam a fisiologia em tempo real, casos clínicos e questões comentadas, cobrindo os 11 sistemas.
 
-### [▶ Abrir o app no navegador]([https://exulansis11.github.io/Fisiologia-Interativa/])
+
 
 ![versão](https://img.shields.io/badge/versão-3.1.1-c41e3a)
 ![sistemas](https://img.shields.io/badge/sistemas-11-1f6feb)
